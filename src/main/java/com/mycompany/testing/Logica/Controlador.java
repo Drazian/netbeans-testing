@@ -81,11 +81,16 @@ public class Controlador implements IControlador {
             // 1. Buscar la entidad en la Base de Datos usando su clave primaria (@Id)
             EMPRESA empresa = em.find(EMPRESA.class, nombre);
 
-            // 2. Validar que la entidad exista antes de intentar eliminarla
+            // 2. Validar que la entidad exista y sin usuarios asociados antes de intentar eliminarla
             if (empresa == null) {
                 throw new Exception("No se encontró la empresa con el nombre: " + nombre);
             }
-
+            
+            Long usuariosAsociados = em.createQuery("SELECT COUNT(u) FROM USUARIO u WHERE u.empresa.nombre = :nombreEmpresa", Long.class).setParameter("nombreEmpresa", nombre).getSingleResult();
+            if (usuariosAsociados > 0) {
+                throw new Exception ("No se puede eliminar la empresa '"+nombre+"' porque tiene "+usuariosAsociados+" usuario(s) activo(s).");
+            }
+            
             // 3. Marcar la entidad para ser removida de la BD
             em.remove(empresa);
 

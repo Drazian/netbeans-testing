@@ -96,7 +96,7 @@ public class Presentacion extends javax.swing.JFrame {
     }//GEN-LAST:event_miListarEmpresasActionPerformed
 
     private void miUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miUsuariosActionPerformed
-        javax.swing.JInternalFrame internalFrame = new javax.swing.JInternalFrame("Empresas",true,true,true,true);
+        javax.swing.JInternalFrame internalFrame = new javax.swing.JInternalFrame("Usuarios",true,true,true,true);
         internalFrame.getContentPane().add(new Usuarios());
         internalFrame.pack();
         this.DesktopPane.add(internalFrame);
