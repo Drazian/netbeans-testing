@@ -4,6 +4,8 @@
  */
 package com.mycompany.testing;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author pipo
@@ -37,6 +39,7 @@ public class CrearEmpresa extends javax.swing.JPanel {
         lblCreacion.setText("Creacion:");
 
         btnCrear.setText("Crear Empresa");
+        btnCrear.addActionListener(this::btnCrearActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -75,6 +78,31 @@ public class CrearEmpresa extends javax.swing.JPanel {
                 .addGap(26, 26, 26))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        // TODO add your handling code here:
+        try {
+            String nombre = txtNombre.getText().trim();
+            int creacion = Integer.parseInt(txtCreacion.getText().trim());
+
+            EMPRESA empresa = new EMPRESA(nombre, creacion);
+
+            Controlador controlador = new Controlador();
+            controlador.guardar(empresa);
+
+            JOptionPane.showMessageDialog(this, "Empresa guardada correctamente.");
+
+            // Limpiar campos tras guardar
+            txtNombre.setText("");
+            txtCreacion.setText("");
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El año de creación debe ser un número entero válido.", "Error de formato", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar en la base de datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btnCrearActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
