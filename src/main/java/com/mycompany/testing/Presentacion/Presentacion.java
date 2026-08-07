@@ -81,7 +81,6 @@ public class Presentacion extends javax.swing.JFrame {
         javax.swing.JInternalFrame internalFrame = new javax.swing.JInternalFrame("Crear Empresa",true,true,true,true);
         internalFrame.getContentPane().add(new CrearEmpresa());
         internalFrame.pack();
-        //internalFrame.setDefaultCloseOperation(javax.swing.JInternalFrame.DISPOSE_ON_CLOSE);
         this.DesktopPane.add(internalFrame);
         internalFrame.setVisible(true);
     }//GEN-LAST:event_miCrearEmpresaActionPerformed
