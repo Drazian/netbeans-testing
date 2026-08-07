@@ -5,7 +5,9 @@
 package com.mycompany.testing.Logica;
 
 import com.mycompany.testing.Persistencia.DTempresa;
+import com.mycompany.testing.Persistencia.DTusuario;
 import com.mycompany.testing.Persistencia.EMPRESA;
+import com.mycompany.testing.Persistencia.USUARIO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -125,4 +127,111 @@ public class Controlador implements IControlador {
     }
 
 
+
+    @Override
+    public void crearUsuario(String nombre, int edad, String nombreEmpresa) throws Exception{
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            
+            //Verifica que la empresa exista y la obtiene
+            EMPRESA empresa = em.find(EMPRESA.class, nombreEmpresa);
+            if (empresa == null){
+                throw new Exception("La empresa seleccionada no existe.");
+            }
+            
+            // La entidad se crea dentro del controlador
+            USUARIO usuario = new USUARIO(nombre, edad, empresa);
+            em.persist(usuario);
+            
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            em.close();
+        }    
+    }
+    
+    @Override
+    public void editarUsuario(String nombre, int nuevaEdad, String nuevaEmpresa) throws Exception{
+        EntityManager em = emf.createEntityManager();
+            try {
+                em.getTransaction().begin();
+
+                USUARIO u = em.find(USUARIO.class, nombre);
+                if (u == null) throw new Exception("Usuario no encontrado.");
+
+                EMPRESA e = em.find(EMPRESA.class, nuevaEmpresa);
+                if (e == null) throw new Exception("La empresa seleccionada no existe.");
+
+                u.setEdad(nuevaEdad);
+                u.setEmpresa(e); // Actualiza la relación en JPA
+
+                em.getTransaction().commit();
+            } catch (Exception ex) {
+                if (em.getTransaction().isActive()) em.getTransaction().rollback();
+                throw ex;
+            } finally {
+                em.close();
+        }    
+    }
+    
+    @Override
+    public void eliminarUsuario(String nombre) throws Exception{
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+
+            USUARIO u = em.find(USUARIO.class, nombre);
+            if (u != null) {
+                em.remove(u);
+            }
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
+    
+    @Override
+    public List<DTusuario> listarUsuarios() throws Exception{
+        EntityManager em = emf.createEntityManager();
+            List<DTusuario> resultado = new ArrayList<>();
+            try {
+                List<USUARIO> usuarios = em.createQuery("SELECT u FROM USUARIO u", USUARIO.class).getResultList();
+                for (USUARIO u : usuarios) {
+                    resultado.add(new DTusuario(u.getNombre(), u.getEdad(), u.getEmpresa().getNombre()));
+                }
+                return resultado;
+            } finally {
+                em.close();
+        }    
+    }
+    
+    @Override
+    public void celebrarCumpleanios(String nombre) throws Exception{
+        EntityManager em = emf.createEntityManager();
+            try {
+                em.getTransaction().begin();
+
+                USUARIO u = em.find(USUARIO.class, nombre);
+                if (u == null) throw new Exception("Usuario no encontrado.");
+
+                u.setEdad(u.getEdad() + 1); // Incremento directo
+
+                em.getTransaction().commit();
+            } catch (Exception e) {
+                if (em.getTransaction().isActive()) em.getTransaction().rollback();
+                throw e;
+            } finally {
+                em.close();
+        }
+    }
+       
 }

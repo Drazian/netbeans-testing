@@ -67,6 +67,7 @@ public class Presentacion extends javax.swing.JFrame {
         mUsuarios.setText("Usuarios");
 
         miUsuarios.setText("Usuarios");
+        miUsuarios.addActionListener(this::miUsuariosActionPerformed);
         mUsuarios.add(miUsuarios);
 
         mbMain.add(mUsuarios);
@@ -93,6 +94,14 @@ public class Presentacion extends javax.swing.JFrame {
         internalFrame.setVisible(true);
         
     }//GEN-LAST:event_miListarEmpresasActionPerformed
+
+    private void miUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miUsuariosActionPerformed
+        javax.swing.JInternalFrame internalFrame = new javax.swing.JInternalFrame("Empresas",true,true,true,true);
+        internalFrame.getContentPane().add(new Usuarios());
+        internalFrame.pack();
+        this.DesktopPane.add(internalFrame);
+        internalFrame.setVisible(true);
+    }//GEN-LAST:event_miUsuariosActionPerformed
 
     /**
      * @param args the command line arguments

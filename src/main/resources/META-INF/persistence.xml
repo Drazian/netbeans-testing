@@ -5,6 +5,8 @@
     <class>com.mycompany.testing.Empresa</class>
     <class>com.mycompany.testing.EMPRESA</class>
     <class>com.mycompany.testing.Persistencia.DTempresa</class>
+    <class>com.mycompany.testing.Persistencia.USUARIO</class>
+    <class>com.mycompany.testing.Persistencia.DTusuario</class>
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/testing"/>
       <property name="jakarta.persistence.jdbc.user" value="pipo"/>
