@@ -91,7 +91,6 @@ public class Presentacion extends javax.swing.JFrame {
         internalFrame.pack();
         this.DesktopPane.add(internalFrame);
         internalFrame.setVisible(true);
-        
     }//GEN-LAST:event_miListarEmpresasActionPerformed
 
     private void miUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miUsuariosActionPerformed
