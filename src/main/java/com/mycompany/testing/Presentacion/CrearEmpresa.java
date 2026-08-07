@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.mycompany.testing;
-
+package com.mycompany.testing.Presentacion;
+import com.mycompany.testing.Logica.Fabrica;
+import com.mycompany.testing.Logica.IControlador;
 import javax.swing.JOptionPane;
 
 /**
@@ -80,19 +81,15 @@ public class CrearEmpresa extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        // TODO add your handling code here:
         try {
             String nombre = txtNombre.getText().trim();
             int creacion = Integer.parseInt(txtCreacion.getText().trim());
 
-            EMPRESA empresa = new EMPRESA(nombre, creacion);
-
-            Controlador controlador = new Controlador();
-            controlador.guardar(empresa);
+            IControlador ic = Fabrica.getInstance().getIControlador();
+            ic.crearEmpresa(nombre, creacion);
 
             JOptionPane.showMessageDialog(this, "Empresa guardada correctamente.");
 
-            // Limpiar campos tras guardar
             txtNombre.setText("");
             txtCreacion.setText("");
 

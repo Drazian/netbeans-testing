@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.testing;
+package com.mycompany.testing.Presentacion;
 
 
 /**
@@ -59,6 +59,7 @@ public class Presentacion extends javax.swing.JFrame {
         mEmpresas.add(miCrearEmpresa);
 
         miListarEmpresas.setText("Listar empresas");
+        miListarEmpresas.addActionListener(this::miListarEmpresasActionPerformed);
         mEmpresas.add(miListarEmpresas);
 
         mbMain.add(mEmpresas);
@@ -76,16 +77,22 @@ public class Presentacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miCrearEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCrearEmpresaActionPerformed
-        // TODO add your handling code here:
-        
         javax.swing.JInternalFrame internalFrame = new javax.swing.JInternalFrame("Crear Empresa",true,true,true,true);
         internalFrame.getContentPane().add(new CrearEmpresa());
         internalFrame.pack();
         //internalFrame.setDefaultCloseOperation(javax.swing.JInternalFrame.DISPOSE_ON_CLOSE);
-        
         this.DesktopPane.add(internalFrame);
         internalFrame.setVisible(true);
     }//GEN-LAST:event_miCrearEmpresaActionPerformed
+
+    private void miListarEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarEmpresasActionPerformed
+        javax.swing.JInternalFrame internalFrame = new javax.swing.JInternalFrame("Empresas",true,true,true,true);
+        internalFrame.getContentPane().add(new ListarEmpresas());
+        internalFrame.pack();
+        this.DesktopPane.add(internalFrame);
+        internalFrame.setVisible(true);
+        
+    }//GEN-LAST:event_miListarEmpresasActionPerformed
 
     /**
      * @param args the command line arguments
