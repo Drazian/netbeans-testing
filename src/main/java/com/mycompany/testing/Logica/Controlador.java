@@ -21,6 +21,7 @@ import java.util.List;
 public class Controlador implements IControlador {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("Persistencia"); 
    
+    
     @Override
     public void crearEmpresa(String nombre, int anioCreacion) throws Exception {
         EntityManager em = emf.createEntityManager();
