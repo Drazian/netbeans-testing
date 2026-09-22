@@ -21,8 +21,10 @@ public class Usuarios extends javax.swing.JPanel {
     /**
      * Creates new form Usuarios
      */
+    
     public Usuarios() {
         initComponents();
+        
         cargarCbEmpresa();
         cargarTablaUsuarios();
     }
